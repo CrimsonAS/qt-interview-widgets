@@ -25,7 +25,7 @@ namespace Ui {
     class TestWidget;
 }
 
-class TestWidget : public AWidget
+class TestWidget : public QtModelWidget
 {
     Q_OBJECT
 

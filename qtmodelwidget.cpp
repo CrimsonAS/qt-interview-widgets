@@ -16,29 +16,26 @@
  * Inc., 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include "awidget.h"
-#include <QLabel>
-#include <QModelIndex>
-#include <QVBoxLayout>
+#include "qtmodelwidget.h"
 
-AWidget::AWidget(QAbstractItemModel *model, QModelIndex index) :
+QtModelWidget::QtModelWidget(QAbstractItemModel *model, QModelIndex index) :
     QWidget(0),
     m_model(model),
     m_index(index)
 {
 }
 
-QModelIndex AWidget::index() const
+QModelIndex QtModelWidget::index() const
 {
     return m_index;
 }
 
-QAbstractItemModel *AWidget::model() const
+QAbstractItemModel *QtModelWidget::model() const
 {
     return m_model;
 }
 
-void AWidget::dataChanged()
+void QtModelWidget::dataChanged()
 {
     // must be reimplemented by an inheriting class
     abort();

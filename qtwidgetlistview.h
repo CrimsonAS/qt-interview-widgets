@@ -20,13 +20,13 @@
 #define AWIDGETLISTVIEW_H
 
 #include <QListWidget>
-class AWidget;
+class QtModelWidget;
 
-/** AWidgetListView is a list view, powered by Qt's Interview framework.
+/** QtWidgetListView is a list view, powered by Qt's Interview framework.
   * Unlike a traditional listview, it allows for full, easy customisation of the UI, by presenting items
   * as regular widgets, which may be created through Qt Designer or other means.
   */
-class AWidgetListView : public QListWidget
+class QtWidgetListView : public QListWidget
 {
     Q_OBJECT
 public:
@@ -35,7 +35,7 @@ public:
       *                   e.g. MyClass::staticMetaObject
       * @param parent A regular QObject parent.
       */
-    explicit AWidgetListView(const QMetaObject *metaObject, QWidget *parent = 0);
+    explicit QtWidgetListView(const QMetaObject *metaObject, QWidget *parent = 0);
 
     /** Sets the model of this view.
       * @param model A subclass of QAbstractItemModel.
@@ -47,7 +47,7 @@ private slots:
     void populateModel();
 private:
     const QMetaObject *m_metaObject;
-    QList<AWidget *> m_widgets;
+    QList<QtModelWidget *> m_widgets;
     QAbstractItemModel *m_model;
 };
 

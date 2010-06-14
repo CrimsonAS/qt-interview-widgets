@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     TestModel tm;
-    AWidgetListView awlv(&TestWidget::staticMetaObject);
+    QtWidgetListView awlv(&TestWidget::staticMetaObject);
     awlv.setModel(&tm);
     awlv.show();
 

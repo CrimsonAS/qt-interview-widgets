@@ -16,16 +16,16 @@
  * Inc., 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include "awidgetlistview.h"
-#include "awidget.h"
+#include "qtwidgetlistview.h"
+#include "qtmodelwidget.h"
 
-AWidgetListView::AWidgetListView(const QMetaObject *metaObject, QWidget *parent) :
+QtWidgetListView::QtWidgetListView(const QMetaObject *metaObject, QWidget *parent) :
     QListWidget(parent),
     m_metaObject(metaObject)
 {
 }
 
-void AWidgetListView::setModel(QAbstractItemModel *model)
+void QtWidgetListView::setModel(QAbstractItemModel *model)
 {
     // TODO: disconnect signals from old model
 
@@ -41,14 +41,14 @@ void AWidgetListView::setModel(QAbstractItemModel *model)
     populateModel();
 }
 
-void AWidgetListView::populateModel()
+void QtWidgetListView::populateModel()
 {
     // clear old widget list
     while (!m_widgets.empty())
         m_widgets.takeFirst()->deleteLater();
 
     for (int i = 0; i != m_model->rowCount(); ++i) {
-        AWidget *widget = static_cast<AWidget *>(m_metaObject->newInstance
+        QtModelWidget *widget = static_cast<QtModelWidget *>(m_metaObject->newInstance
                                                  (
                                                   Q_ARG(QAbstractItemModel*, m_model),
                                                   Q_ARG(QModelIndex, m_model->index(i, 0))
@@ -65,7 +65,7 @@ void AWidgetListView::populateModel()
     onDataChanged(m_model->index(0, 0), m_model->index(m_widgets.count() - 1, 0));
 }
 
-void AWidgetListView::onDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight)
+void QtWidgetListView::onDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight)
 {
     // send notifications to all the widgets that their data changed
     int bottomRow = bottomRight.row() + 1;

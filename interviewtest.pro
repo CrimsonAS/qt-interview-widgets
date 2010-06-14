@@ -11,14 +11,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-    awidgetlistview.cpp \
-    awidget.cpp \
+    qtwidgetlistview.cpp \
+    qtmodelwidget.cpp \
     testmodel.cpp \
     testwidget.cpp
 
 HEADERS  += \
-    awidgetlistview.h \
-    awidget.h \
+    qtwidgetlistview.h \
+    qtmodelwidget.h \
     testmodel.h \
     testwidget.h
 

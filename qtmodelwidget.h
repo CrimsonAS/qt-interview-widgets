@@ -23,31 +23,32 @@
 #include <QWidget>
 class QAbstractItemModel;
 
-/** AWidget is a simple subclass.
-  * It represents the base class of all widgets that may be inserted into an AWidgetListView.
+/** QtModelWidget is a simple subclass.
+  * It represents the base class of all widgets that may be inserted into an QtWidgetListView.
   *
-  * An AWidget is sort of like QWidget and QAbstractItemDelegate eloped, made sweet, sweet love,
+  * A QtModelWidget is sort of like QWidget and QAbstractItemDelegate eloped, made sweet, sweet love,
   * and had a baby.
   *
-  * The difference with AWidget and a delegate is you probably won't be doing the painting yourself:
+  * The difference with QtModelWidget and a delegate is you probably won't be doing the painting yourself:
   * you'll just be altering 'building block' widgets you put on your UI with Designer or something.
   *
-  * Things to remember when writing an AWidget:
+  * Things to remember when writing a QtModelWidget subclass:
   *   * You must implement dataChanged().
   *     dataChanged() is automatically invoked when the data for your QModelIndex is changed,
   *     and as such, you need to update your UI as appropriate (and, if you're doing custom painting,
   *     remember to call QWidget::update())
-  *   * You must have a constructor taking a model and index paramter, and passing them to AWidget's constructor.
+  *   * You must have a constructor with the same signal as QtModelWidget's constructor, that
+  *     invokes QtModelWidget's constructor.
   *   * You must mark your constructor Q_INVOKABLE!
   *
   * These are non-negotiable. It's just how the system works.
   */
-class AWidget : public QWidget
+class QtModelWidget : public QWidget
 {
     Q_OBJECT
 public:
     Q_INVOKABLE
-    explicit AWidget(QAbstractItemModel *model, QModelIndex index);
+    explicit QtModelWidget(QAbstractItemModel *model, QModelIndex index);
 
     /** dataChanged() is called whenever data for this particular item in the model has been altered.
       * You should get the data from model() (using index()) and set up/alter your GUI using it, much

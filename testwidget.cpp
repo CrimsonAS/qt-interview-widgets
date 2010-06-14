@@ -20,7 +20,7 @@
 #include "ui_testwidget.h"
 
 TestWidget::TestWidget(QAbstractItemModel *model, QModelIndex index) :
-    AWidget(model, index),
+    QtModelWidget(model, index),
     ui(new Ui::TestWidget)
 {
     ui->setupUi(this);
