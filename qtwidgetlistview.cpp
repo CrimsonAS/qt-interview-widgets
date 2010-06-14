@@ -99,12 +99,19 @@ void QtWidgetListView::onDataChanged(const QModelIndex &topLeft, const QModelInd
     // send notifications to all the widgets that their data changed
     int bottomRow = bottomRight.row() + 1;
     for (int i = topLeft.row(); i != bottomRow; ++i) {
-        m_widgets.at(i)->dataChanged();
+        QtModelWidget *widget = m_widgets.at(i);
 
-        // Alter sizehints for this item also
-        QSize size = m_widgets.at(i)->sizeHint();
+        // tell it its data changed so it can reposition UI
+        widget->dataChanged();
+
+        // get the new sizehint from it
+        QSize size = widget->sizeHint();
+
+        // cap at our own width
         if (size.width() > viewport()->geometry().width())
             size.setWidth(viewport()->geometry().width());
+
+        // change sizehint on the item.
         item(i)->setSizeHint(size);
     }
 }
