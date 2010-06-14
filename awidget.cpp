@@ -26,7 +26,6 @@ AWidget::AWidget(QAbstractItemModel *model, QModelIndex index) :
     m_model(model),
     m_index(index)
 {
-    setContentsMargins(0, 0, 0, 0);
 }
 
 QModelIndex AWidget::index() const
