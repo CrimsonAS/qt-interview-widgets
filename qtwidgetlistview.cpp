@@ -55,9 +55,8 @@ void QtWidgetListView::setModel(QAbstractItemModel *model)
     connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(onDataChanged(QModelIndex,QModelIndex)));
     connect(model, SIGNAL(layoutChanged()), this, SLOT(populateModel())); // cheat: just redo the whole view if layout changes
     connect(model, SIGNAL(modelReset()), this, SLOT(populateModel())); // not sure precisely what this is supposed to do; so we cheat
-    connect(model, SIGNAL(rowsInserted()), this, SLOT(populateModel())); // this won't perform great. we should do it properly.
-    connect(model, SIGNAL(rowsMoved()), this, SLOT(populateModel())); // this won't perform great. we should do it properly.
-    connect(model, SIGNAL(rowsRemoved()), this, SLOT(populateModel())); // this won't perform great. we should do it properly.
+    connect(model, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(populateModel())); // this won't perform great. we should do it properly.
+    connect(model, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(populateModel())); // this won't perform great. we should do it properly.
 
     m_model = model;
     populateModel();
