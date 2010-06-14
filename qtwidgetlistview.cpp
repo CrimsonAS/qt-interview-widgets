@@ -84,7 +84,8 @@ void QtWidgetListView::populateModel()
     }
 
     // Populate the UI for the first time
-    onDataChanged(m_model->index(0, 0), m_model->index(m_widgets.count() - 1, 0));
+    if (m_widgets.count())
+        onDataChanged(m_model->index(0, 0), m_model->index(m_widgets.count() - 1, 0));
 }
 
 void QtWidgetListView::onDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight)
