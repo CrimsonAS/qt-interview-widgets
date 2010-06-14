@@ -1,0 +1,23 @@
+what is this
+============
+
+/** AWidgetListView is a list view, powered by Qt's Interview framework.
+  * Unlike a traditional listview, it allows for full, easy customisation of the UI, by presenting items
+  * as regular widgets, which may be created through Qt Designer or other means.
+  */
+
+Basically, it's like QWidget and QAbstractItemDelegate eloped, made sweet, sweet love, and had a lovechild.
+
+You create an AWidget subclass, and an AWidgetListView instance, passing the AWidgetListView the staticMetaObject of your widget subclass.
+
+Then, you set a model on the listview, and watch in amazement as AWidgetListView creates widgets for your model.
+
+This allows for rich UI, done easily - no manual painting like delegates, meaning more robust, flexible, and easy to maintain code.
+
+contact
+=======
+
+All contact to do with this code should go to:
+ robin.burchell@collabora.co.uk
+
+Patches, of course, are welcome.
