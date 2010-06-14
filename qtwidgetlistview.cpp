@@ -35,11 +35,16 @@ class QtWidgetListDelegate : public QStyledItemDelegate
     }
 };
 
-QtWidgetListView::QtWidgetListView(const QMetaObject *metaObject, QWidget *parent) :
+QtWidgetListView::QtWidgetListView(QWidget *parent) :
     QListWidget(parent),
-    m_metaObject(metaObject)
+    m_metaObject(0)
 {
     setItemDelegate(new QtWidgetListDelegate);
+}
+
+void QtWidgetListView::setMetaObject(const QMetaObject *metaObject)
+{
+    m_metaObject = metaObject;
 }
 
 void QtWidgetListView::setModel(QAbstractItemModel *model)

@@ -31,11 +31,14 @@ class QtWidgetListView : public QListWidget
     Q_OBJECT
 public:
     /** Create a view instance.
-      * @param metaObject The meta object of the AWidget class you wish this listview to use.
-      *                   e.g. MyClass::staticMetaObject
       * @param parent A regular QObject parent.
       */
-    explicit QtWidgetListView(const QMetaObject *metaObject, QWidget *parent = 0);
+    explicit QtWidgetListView(QWidget *parent = 0);
+
+    /** Sets the metaobject for the QtModelWidget-derived class you wish this view to create instances of.
+      * @param metaObject The meta object of the AWidget class you wish this listview to use.
+      */
+    void setMetaObject(const QMetaObject *metaObject);
 
     /** Sets the model of this view.
       * @param model A subclass of QAbstractItemModel.

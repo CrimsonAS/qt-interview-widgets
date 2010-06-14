@@ -20,16 +20,17 @@
 
 #include "testmodel.h"
 #include "testwidget.h"
-#include "awidgetlistview.h"
+#include "qtwidgetlistview.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
     TestModel tm;
-    QtWidgetListView awlv(&TestWidget::staticMetaObject);
-    awlv.setModel(&tm);
-    awlv.show();
+    QtWidgetListView wlv;
+    wlv.setMetaObject(&TestWidget::staticMetaObject);
+    wlv.setModel(&tm);
+    wlv.show();
 
     return a.exec();
 }

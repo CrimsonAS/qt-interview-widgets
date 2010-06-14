@@ -19,7 +19,7 @@
 #ifndef TESTWIDGET_H
 #define TESTWIDGET_H
 
-#include "awidget.h"
+#include "qtmodelwidget.h"
 
 namespace Ui {
     class TestWidget;
