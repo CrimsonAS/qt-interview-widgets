@@ -68,6 +68,9 @@ void QtWidgetListView::populateModel()
     while (!m_widgets.empty())
         m_widgets.takeFirst()->deleteLater();
 
+    // remove all rows from the view
+    clear();
+
     for (int i = 0; i != m_model->rowCount(); ++i) {
         QtModelWidget *widget = static_cast<QtModelWidget *>(m_metaObject->newInstance
                                                  (
