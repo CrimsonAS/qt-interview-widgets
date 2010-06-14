@@ -74,6 +74,10 @@ void QtWidgetListView::populateModel()
                                                   Q_ARG(QAbstractItemModel*, m_model),
                                                   Q_ARG(QModelIndex, m_model->index(i, 0))
                                                  ));
+        // if this asserts, you either:
+        // 1) have the wrong constructor arguments
+        // 2) forgot to mark it Q_INVOKABLE.
+        Q_ASSERT(widget);
 
         m_widgets.append(widget);
 
