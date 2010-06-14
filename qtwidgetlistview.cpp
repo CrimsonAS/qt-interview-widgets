@@ -16,13 +16,30 @@
  * Inc., 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#include <QStyledItemDelegate>
+
 #include "qtwidgetlistview.h"
 #include "qtmodelwidget.h"
+
+class QtWidgetListDelegate : public QStyledItemDelegate
+{
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+    {
+        // Remove selected state
+        QStyleOptionViewItemV4 opt(option);
+        initStyleOption(&opt, index);
+
+        opt.state &= ~QStyle::State_Selected;
+
+        QStyledItemDelegate::paint(painter, opt, index);
+    }
+};
 
 QtWidgetListView::QtWidgetListView(const QMetaObject *metaObject, QWidget *parent) :
     QListWidget(parent),
     m_metaObject(metaObject)
 {
+    setItemDelegate(new QtWidgetListDelegate);
 }
 
 void QtWidgetListView::setModel(QAbstractItemModel *model)
