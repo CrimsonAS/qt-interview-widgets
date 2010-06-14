@@ -102,6 +102,9 @@ void QtWidgetListView::onDataChanged(const QModelIndex &topLeft, const QModelInd
         m_widgets.at(i)->dataChanged();
 
         // Alter sizehints for this item also
-        item(i)->setSizeHint(m_widgets.at(i)->sizeHint());
+        QSize size = m_widgets.at(i)->sizeHint();
+        if (size.width() > viewport()->geometry().width())
+            size.setWidth(viewport()->geometry().width());
+        item(i)->setSizeHint(size);
     }
 }
