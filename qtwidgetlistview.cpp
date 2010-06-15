@@ -17,6 +17,7 @@
  */
 
 #include <QStyledItemDelegate>
+#include <QEvent>
 
 #include "qtwidgetlistview.h"
 #include "qtmodelwidget.h"
@@ -82,6 +83,9 @@ void QtWidgetListView::populateModel()
         // 2) forgot to mark it Q_INVOKABLE.
         Q_ASSERT(widget);
 
+        // parenting for layout changes
+        widget->setParent(this);
+
         m_widgets.append(widget);
 
         QListWidgetItem *item = new QListWidgetItem(this);
@@ -114,4 +118,33 @@ void QtWidgetListView::onDataChanged(const QModelIndex &topLeft, const QModelInd
         // change sizehint on the item.
         item(i)->setSizeHint(size);
     }
+}
+
+bool QtWidgetListView::event(QEvent *event)
+{
+    if (event->type() == QEvent::LayoutRequest) {
+        // one of our children has changed size.
+        // as a result, we need to force relayout of everything.
+        //
+        // NOTE: be careful what you do here. you can cause a (sort of) infinite loop
+        // if you do anything which results in changed data on the widget.
+        // this is why it specifically *does not* call onDataChanged().
+        if (m_widgets.count()) {
+            // iterate over all widgets
+            for (int i = 0; i != m_widgets.count(); ++i) {
+                // fetch sizehint
+                QSize size = m_widgets.at(i)->sizeHint();
+
+                // cap to avoid it spilling out of the listview
+                if (size.width() > viewport()->geometry().width())
+                    size.setWidth(viewport()->geometry().width());
+
+                // resize the item row
+                item(i)->setSizeHint(size);
+            }
+        }
+    }
+
+    // and give QListView the chance to interpret the event as needed.
+    return QListView::event(event);
 }

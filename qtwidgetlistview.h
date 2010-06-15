@@ -45,6 +45,8 @@ public:
       */
     void setModel(QAbstractItemModel *model);
 
+    bool event(QEvent *event);
+
 private slots:
     void onDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);
     void populateModel();
